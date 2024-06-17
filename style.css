@@ -1,0 +1,128 @@
+* {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+body {
+    background: #3c091ce3;
+    overflow: hidden;
+}
+h1{
+    text-align: center;
+    color: aliceblue;
+    font-style: italic;
+    padding-top: 3%;
+}
+main {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 20px 10px rgba(0, 0, 0, 0.15);
+    z-index: 9999;
+}
+.boxes {
+    --col_a: #0f8088;
+    --col_b: #bf7017;
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(to bottom right, var(--col_a), var(--col_b));
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transform-origin: left center;
+    margin: 30px 0 0 120px;
+    transition: all 0.5s ease-in-out;
+    animation: animate 5s ease-in-out infinite,
+               hue 12s ease infinite;
+}
+div:nth-child(1 of .boxes) {
+    --col_a: rgb(210, 210, 34);
+    --col_b: orangered;
+    width: 130px;
+    height: 130px;
+    margin: -40px 0 0 -130px;
+    border-radius: 50%;
+    transform-origin: center center;
+    animation-duration: 3s;
+    animation-delay: -1.5s;
+    animation: hue 12s ease infinite,
+               animate 5s ease-in-out infinite;
+}
+@keyframes animate {
+    0% {
+        transform: translate(-50%, -50%) rotate(20deg);
+    }
+    50% {
+        transform: translate(-50%, -55%) rotateZ(35deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(20deg);
+    }
+}
+@keyframes hue {
+    0% {filter: hue-rotate(0);}
+    100% {filter: hue-rotate(360deg);}
+}
+main .wrap {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: rotate(calc(30deg * var(--i)));
+    color: lightgray;
+    font-size: 22px;
+    font-weight: 900;
+    text-align: center;
+    padding: 15px;
+}
+main .labels {
+    transform: rotate(calc(30deg * var(--j)));
+}
+#hour, #minute, #second {
+    --bgcolor: lightgray;
+    all: unset;
+    position: absolute;
+    width: 2px;
+    height: 75%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(to bottom, var(--bgcolor) 50%, transparent 50%);
+    border-radius: 5px;
+    transform-origin: center center;
+}
+#hour {
+    --bgcolor: rgb(11, 99, 137);
+    width: 9px;
+    height: 55%;
+}
+#minute {
+    --bgcolor: #be0c85;
+    width: 5px;
+    height: calc(75% - 5px);
+}
+#second::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    background: lightgray;
+    border-radius: 50%;
+    z-index: 99999;
+}
